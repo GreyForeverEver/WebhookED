@@ -16,6 +16,19 @@ embed = WebhookEEmbed(title="My Title", description="Hello, World!", color=0xFF5
 dict_data = embed.get_dict()
 ```
 
+But wait, there's more! Enhance your embedded messages with fields using the `WebhookEField` class. Fields allow you to display information in a structured and organized way. Here's how you can level up your embedding game:
+
+```python
+# Create a WebhookEField instance
+field = WebhookEField(name="Field Name", value="Field Value", inline=True)
+
+# Include the field in your WebhookEEmbed instance
+embed_with_field = WebhookEEmbed(title="My Title", fields=[field], color=0xFF5733)
+
+# Obtain the updated dictionary representation
+dict_data_with_field = embed_with_field.get_dict()
+```
+
 ### 2. WebhookEMessage
 
 `WebhookEMessage` is a class for creating messages. You can include content, a username, an avatar URL, and embeds. Use the `get_dict` method to get the dictionary representation.
