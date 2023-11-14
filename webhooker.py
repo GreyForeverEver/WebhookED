@@ -73,13 +73,14 @@ class WebhookER(object):
     def _post(self, data: json):
         response = requests.post(self.url+"?wait=true", json = data)
         if response.status_code != 200:
+            if response.status_code == 400:
+                raise WebhookEError("Wrong Webhook URL.")
             if response.json()["code"] == 50006:
                 raise WebhookEError("Message Cannot Be Empty.")
         return response
     
     def _edit(self, data: json,id: str):
         response = requests.post(self.url+f"/messages/{id}", json = data)
-        print(response.content)
         if response.status_code != 200:
             if response.json()["code"] == 0:
                 raise WebhookEError("Cannot edit this message, unknown or not allowed.")
