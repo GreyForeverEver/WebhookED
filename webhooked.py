@@ -3,6 +3,24 @@ import requests
         
 class WebhookEEmbed(object):
     def __init__(self, title = None, type = None, description = None, url = None, timestamp = None, color = None, footer = None, image = None, thumbnail = None, video = None, provider = None, author = None, fields = None):
+        """
+        Initializes a WebhookEEmbed instance with optional parameters.
+
+        Parameters:
+        - title: The title of the embed.
+        - type: The type of the embed.
+        - description: The description text of the embed.
+        - url: The URL of the embed.
+        - timestamp: The timestamp of the embed.
+        - color: The color code of the embed.
+        - footer: The footer of the embed.
+        - image: The image of the embed.
+        - thumbnail: The thumbnail of the embed.
+        - video: The video of the embed.
+        - provider: The provider of the embed.
+        - author: The author of the embed.
+        - fields: The fields of the embed.
+        """
         self.title = title
         self.type = type
         self.description = description
@@ -67,6 +85,16 @@ class WebhookEEmbed(object):
 
 class WebhookEMessage(object):
     def __init__(self, content: str = None, username: str = None, avatar_url: str = None, tts: bool = None, embeds: list[WebhookEEmbed] or WebhookEEmbed = []):
+        """
+        Initializes a WebhookEMessage instance with optional parameters.
+
+        Parameters:
+        - content: The content of the message.
+        - username: The username of the message sender.
+        - avatar_url: The avatar URL of the message sender.
+        - tts: A boolean indicating if the message should be sent as a TTS (Text-to-Speech) message.
+        - embeds: A list of WebhookEEmbed instances or a single WebhookEEmbed instance representing message embeds.
+        """
         self.content = content
         self.username = username
         self.avatar_url = avatar_url
@@ -121,6 +149,12 @@ class WebhookEError(Exception):
 
 class WebhookER(object):
     def __init__(self, url):
+        """
+        Initializes a WebhookER instance with the Discord webhook URL.
+
+        Parameters:
+        - url: The URL of the Discord webhook.
+        """
         self.url = url
 
     def _post(self, data: json):
