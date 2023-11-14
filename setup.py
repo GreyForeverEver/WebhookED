@@ -26,7 +26,7 @@ def read_requirements(path):
 
 
 setup(
-    name="WebhookER",
+    name="WebhookED",
     version="0.1.0",
     author="GreyForever",
     description="A Python library for interacting with Discord webhooks",
