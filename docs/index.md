@@ -7,7 +7,7 @@ WebhookED is a Python library designed to simplify the process of interacting wi
 Install WebhookED using pip:
 
 ```bash
-pip install WebhookED
+pip install https://github.com/GreyForeverEver/WebhookED
 ```
 
 ### Quick Start
