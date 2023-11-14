@@ -1,7 +1,7 @@
-from webhooker import WebhookEEmbed, WebhookEMessage, WebhookER
+from webhooked import WebhookEEmbed, WebhookEMessage, WebhookER
 
 # Replace the URL below with your Discord webhook URL
-webhook_url = "https://discord.com/api/webhooks/1173915720678117406/LZIwu415TeoDAuCkG4U6Ff9lghPY_HoLomVUm-27obevqPmycIXxGI6d62tX02I3Z_B7"
+webhook_url = "<webhook_url>"
 
 # Create an embedded message
 embed = WebhookEEmbed(
