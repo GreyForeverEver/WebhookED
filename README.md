@@ -25,7 +25,39 @@ message = WebhookEMessage(content="Hello, World!", username="MyBot", avatar_url=
 dict_data = message.get_dict()
 ```
 
-### 3. WebhookER
+### 3. Load from Dict
+
+Both `WebhookEEmbed` and `WebhookEMessage` classes include a method named `load_from_dict`. This method is designed to populate the instance's attributes based on the information provided in a dictionary.
+
+#### 3.1. WebhookEEmbed
+
+`load_from_dict` in the `WebhookEEmbed` class allows you to initialize an instance using a dictionary. This is particularly useful when you have the data in a serialized format, and you want to recreate the object.
+
+Example:
+
+```python
+# Assuming dict_data is a dictionary with the necessary attributes
+embed = WebhookEEmbed()
+embed.load_from_dict(dict_data)
+```
+
+#### 3.2. WebhookEMessage
+
+Similarly, `load_from_dict` in the `WebhookEMessage` class populates the instance's attributes based on the provided dictionary. This method is handy when you want to reconstruct a message object from saved data.
+
+Example:
+
+```python
+# Assuming dict_data is a dictionary with the necessary attributes
+message = WebhookEMessage()
+message.load_from_dict(dict_data)
+```
+
+By using `load_from_dict`, you can easily recreate instances of `WebhookEEmbed` and `WebhookEMessage` from serialized data, providing flexibility and convenience in your application.
+
+---
+
+### 4. WebhookER
 
 `WebhookER` is the main class for interacting with Discord webhooks. Initialize it with the webhook URL.
 
