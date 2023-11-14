@@ -5,8 +5,21 @@
 
 WebhookED is a Python library designed to simplify interactions with Discord webhooks. It allows you to send and edit messages, handle errors, and incorporate rich content seamlessly. Below are explanations on how to use its main features.
 
-```bash
-pip install git+https://github.com/GreyForeverEver/WebhookED.git
+### Quick Start
+
+```python
+from WebhookED import WebhookER, WebhookEMessage, WebhookEEmbed, WebhookEField
+
+webhook = WebhookER("<your_discord_webhook_url_here>")
+
+field1 = WebhookEField(name="Field 1", value="Value 1", inline=True)
+field2 = WebhookEField(name="Field 2", value="Value 2", inline=False)
+embed = WebhookEEmbed(title="Hello, Discord!", fields=[field1, field2])
+message = WebhookEMessage(content="Greetings!", embeds=[embed])
+
+sent_message = webhook.send(message)
+
+edited_message = webhook.edit(sent_message, WebhookEMessage(content="Updated Greetings!"))
 ```
 
 ## Features
