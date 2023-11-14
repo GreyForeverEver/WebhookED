@@ -230,3 +230,5 @@ print(f"Dynamic Field dictionary: {field_dict}")
 WebhookER simplifies Discord webhook interactions in Python, making it easy to send and edit messages and create rich content with embeds and fields. If you encounter any issues or have suggestions for improvement, feel free to [open an issue](https://github.com/GreyForeverEver/WebhookED/issues).
 
 Happy coding!
+
+Summary here -> [list](https://greyforeverever.github.io/WebhookED/list)
