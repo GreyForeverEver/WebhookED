@@ -107,7 +107,7 @@ except WebhookEError as e:
 
 ## Getting Started
 
-1. Clone the repository: `git clone https://github.com/GreyForeverEver/WebhookER.git`
+1. Clone the repository: `git clone https://github.com/GreyForeverEver/WebhookED.git`
 2. Import the library into your project.
 3. Follow the usage examples above.
 
