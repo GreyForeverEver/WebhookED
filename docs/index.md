@@ -1,19 +1,19 @@
-## WebhookER: A Python Library for Discord Webhooks
+## WebhookED: A Python Library for Discord Webhooks
 
-WebhookER is a Python library designed to simplify the process of interacting with Discord webhooks. This library provides a convenient interface for sending and editing messages, as well as constructing embeds with fields for richer content.
+WebhookED is a Python library designed to simplify the process of interacting with Discord webhooks. This library provides a convenient interface for sending and editing messages, as well as constructing embeds with fields for richer content.
 
 ### Installation
 
-Install WebhookER using pip:
+Install WebhookED using pip:
 
 ```bash
-pip install WebhookER
+pip install WebhookED
 ```
 
 ### Quick Start
 
 ```python
-from WebhookER import WebhookER, WebhookEMessage, WebhookEEmbed, WebhookEField
+from WebhookED import WebhookER, WebhookEMessage, WebhookEEmbed, WebhookEField
 
 # Initialize the WebhookER instance with your Discord webhook URL
 webhook = WebhookER("your_discord_webhook_url_here")
