@@ -4,9 +4,6 @@
 # WebhookED: Discord Webhook Library
 
 WebhookED is a Python library designed to simplify interactions with Discord webhooks. It allows you to send and edit messages, handle errors, and incorporate rich content seamlessly. Below are explanations on how to use its main features.
-```bash
-pip install git+https://github.com/GreyForeverEver/WebhookED.git
-```
 
 ## Features
 
