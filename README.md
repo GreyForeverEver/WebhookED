@@ -1,5 +1,3 @@
-Got it! Since you've removed the `get_id` method from `WebhookEMessageSent`, here's the updated README to reflect this change:
-
 ---
 
 # WebhookER: Discord Webhook Library
