@@ -173,6 +173,12 @@ class WebhookEMessageSent(WebhookEMessage):
         super().__init__(*args, **kwargs)
         self.id = id
 
+    def get_dict(self):
+        data = super().get_dict()
+        data.update({"id":self.id})
+        return data
+
+
 class WebhookEError(Exception):
     def __init__(self, message="Invalid Message"):
         self.message = message
@@ -188,7 +194,7 @@ class WebhookER(object):
         """
         self.url = url
 
-    def _post(self, data: json):
+    def _post(self, data: dict):
         response = requests.post(self.url+"?wait=true", json = data)
         if response.status_code != 200:
             if response.status_code == 400:
@@ -197,8 +203,8 @@ class WebhookER(object):
                 raise WebhookEError("Message Cannot Be Empty.")
         return response
     
-    def _edit(self, data: json,id: str):
-        response = requests.post(self.url+f"/messages/{id}", json = data)
+    def _edit(self, data: dict, id: str):
+        response = requests.patch(self.url+f"/messages/{id}?wait=true", json = data)
         if response.status_code != 200:
             if response.json()["code"] == 0:
                 raise WebhookEError("Cannot edit this message, unknown or not allowed.")
@@ -218,7 +224,7 @@ class WebhookER(object):
         - WebhookEError: If there is an issue with the request.
         """
         response =  self._post(message.get_dict())
-        return WebhookEMessageSent(response.json()["id"], self)
+        return WebhookEMessageSent(id = response.json()["id"], content = message.content, embeds = message.embeds, tts = message.tts, username = message.username, avatar_url = message.avatar_url)
     
     def edit(self, sent_message: WebhookEMessageSent or str, new_message: WebhookEMessage) -> WebhookEMessageSent:
         """
@@ -238,4 +244,4 @@ class WebhookER(object):
             response = self._edit(new_message.get_dict(), sent_message)
         else:
             response = self._edit(new_message.get_dict(), sent_message.id)
-        return WebhookEMessageSent(response.json()["id"], self)
+        return WebhookEMessageSent(id = response.json()["id"], content = new_message.content, embeds = new_message.embeds, tts = new_message.tts, username = new_message.username, avatar_url = new_message.avatar_url)
