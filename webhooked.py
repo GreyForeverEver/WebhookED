@@ -17,7 +17,13 @@ class WebhookEEmbed(object):
         self.author = author
         self.fields = fields
 
-    def get_dict(self):
+    def get_dict(self) -> dict:
+        """
+        Returns a dictionary representation of the WebhookEEmbed instance.
+
+        Returns:
+        - dict: A dictionary containing the attributes of the WebhookEEmbed instance.
+        """
         data = {
             "title":self.title,
             "type":self.type,
@@ -34,6 +40,30 @@ class WebhookEEmbed(object):
             "fields":self.fields
         }
         return data
+    
+    def load_from_dict(self, dict: dict):
+        """
+        Populates the WebhookEEmbed instance's attributes from a dictionary.
+
+        Parameters:
+        - dict: A dictionary containing attributes to populate the WebhookEEmbed instance.
+
+        Returns:
+        - None
+        """
+        self.title = dict["title"]
+        self.type = dict["type"]
+        self.description = dict["description"]
+        self.url = dict["url"]
+        self.timestamp = dict["timestamp"]
+        self.color = dict["color"]
+        self.footer = dict["footer"]
+        self.image = dict["image"]
+        self.thumbnail = dict["thumbnail"]
+        self.video = dict["video"]
+        self.provider = dict["provider"]
+        self.author = dict["author"]
+        self.fields = dict["fields"]
 
 class WebhookEMessage(object):
     def __init__(self, content: str = None, username: str = None, avatar_url: str = None, tts: bool = None, embeds: list[WebhookEEmbed] or WebhookEEmbed = []):
@@ -47,6 +77,12 @@ class WebhookEMessage(object):
             self.embeds = [embeds]
 
     def get_dict(self):
+        """
+        Returns a dictionary representation of the WebhookEMessage instance.
+
+        Returns:
+        - dict: A dictionary containing the attributes of the WebhookEMessage instance.
+        """
         data = {
             "content":self.content,
             "username":self.username,
@@ -55,6 +91,23 @@ class WebhookEMessage(object):
             "embeds":[e.get_dict() for e in self.embeds]
         }
         return data 
+    
+    def load_from_dict(self, dict: dict):
+        """
+        Populates the WebhookEMessage instance's attributes from a dictionary.
+
+        Parameters:
+        - dict: A dictionary containing attributes to populate the WebhookEMessage instance.
+
+        Returns:
+        - None
+        """
+        self.content = dict["content"]
+        self.username = dict["username"]
+        self.avatar_url = dict["avatar_url"]
+        self.tts = dict["tts"]
+        self.embeds = [WebhookEEmbed().load_from_dict(e) for e in dict["embeds"]]
+
 
 class WebhookEMessageSent(WebhookEMessage):
     def __init__(self, id: str, *args, **kwargs):
@@ -87,10 +140,34 @@ class WebhookER(object):
         return response
     
     def send(self, message: WebhookEMessage) -> WebhookEMessageSent:
+        """
+        Sends a message to the Discord webhook.
+
+        Parameters:
+        - message: An instance of WebhookEMessage representing the message to be sent.
+
+        Returns:
+        - WebhookEMessageSent: An instance representing the sent message with its ID.
+
+        Raises:
+        - WebhookEError: If there is an issue with the request.
+        """
         response =  self._post(message.get_dict())
         return WebhookEMessageSent(response.json()["id"], self)
     
-    def edit(self, sent_message: WebhookEMessageSent, new_message: WebhookEMessage) -> WebhookEMessageSent:
+    def edit(self, sent_message: WebhookEMessageSent or str, new_message: WebhookEMessage) -> WebhookEMessageSent:
+        """
+        Edits a previously sent message on the Discord webhook.
+
+        Parameters:
+        - sent_message: An instance of WebhookEMessageSent or the ID of the message to be edited.
+        - new_message: An instance of WebhookEMessage representing the updated message.
+
+        Returns:
+        - WebhookEMessageSent: An instance representing the edited message with its updated ID.
+
+        Raises:
+        - WebhookEError: If there is an issue with the request.
+        """
         response = self._edit(new_message.get_dict(), sent_message.id)
         return WebhookEMessageSent(response.json()["id"], self)
-    
