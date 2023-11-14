@@ -1,4 +1,6 @@
-
+```bash
+pip install git+https://github.com/GreyForeverEver/WebhookED.git
+```
 ---
 
 # WebhookED: Discord Webhook Library
