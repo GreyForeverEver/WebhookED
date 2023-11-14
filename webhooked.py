@@ -15,7 +15,7 @@ class WebhookEField(object):
         self.value = value
         self.inline = inline
 
-    def get_dict(self):
+    def get_dict(self) -> dict:
         """
         Returns a dictionary representation of the WebhookEField instance.
 
@@ -234,5 +234,8 @@ class WebhookER(object):
         Raises:
         - WebhookEError: If there is an issue with the request.
         """
-        response = self._edit(new_message.get_dict(), sent_message.id)
+        if type(sent_message) is str:
+            response = self._edit(new_message.get_dict(), sent_message)
+        else:
+            response = self._edit(new_message.get_dict(), sent_message.id)
         return WebhookEMessageSent(response.json()["id"], self)
