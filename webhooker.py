@@ -17,7 +17,7 @@ class WebhookEEmbed(object):
         self.author = author
         self.fields = fields
 
-    def get_json(self):
+    def get_dict(self):
         data = {
             "title":self.title,
             "type":self.type,
@@ -46,13 +46,13 @@ class WebhookEMessage(object):
         else:
             self.embeds = [embeds]
 
-    def get_json(self):
+    def get_dict(self):
         data = {
             "content":self.content,
             "username":self.username,
             "avatar_url":self.avatar_url,
             "tts":self.tts,
-            "embeds":[e.get_json() for e in self.embeds]
+            "embeds":[e.get_dict() for e in self.embeds]
         }
         return data 
 
@@ -60,8 +60,6 @@ class WebhookEMessageSent(WebhookEMessage):
     def __init__(self, id: str, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.id = id
-    def get_id(self):
-        return self.id
 
 class WebhookEError(Exception):
     def __init__(self, message="Invalid Message"):
@@ -88,10 +86,10 @@ class WebhookER(object):
         return response
     
     def send(self, message: WebhookEMessage) -> WebhookEMessageSent:
-        response =  self._post(message.get_json())
+        response =  self._post(message.get_dict())
         return WebhookEMessageSent(response.json()["id"], self)
     
     def edit(self, sent_message: WebhookEMessageSent, new_message: WebhookEMessage) -> WebhookEMessageSent:
-        response = self._edit(new_message.get_json(), sent_message.id)
+        response = self._edit(new_message.get_dict(), sent_message.id)
         return WebhookEMessageSent(response.json()["id"], self)
     
