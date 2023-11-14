@@ -1,14 +1,42 @@
 import json
 import requests
+
+class WebhookEField(object):
+    def __init__(self, name: str, value: str, inline: bool = False):
+        """
+        Initializes a WebhookEField instance with the provided parameters.
+
+        Parameters:
+        - name (str): The name/title of the field.
+        - value (str): The value/content of the field.
+        - inline (bool, optional): Whether the field should be displayed inline or not. Default is False.
+        """
+        self.name = name
+        self.value = value
+        self.inline = inline
+
+    def get_dict(self):
+        """
+        Returns a dictionary representation of the WebhookEField instance.
+
+        Returns:
+        - dict: A dictionary containing the attributes of the WebhookEField instance.
+        """
+        data = {
+            "name":self.name,
+            "value":self.value,
+            "inline":self.inline
+        }
+        return data
         
 class WebhookEEmbed(object):
-    def __init__(self, title = None, type = None, description = None, url = None, timestamp = None, color = None, footer = None, image = None, thumbnail = None, video = None, provider = None, author = None, fields = None):
+    def __init__(self, title = None, e_type = None, description = None, url = None, timestamp = None, color = None, footer = None, image = None, thumbnail = None, video = None, provider = None, author = None, fields : [WebhookEField] or WebhookEField = []):
         """
         Initializes a WebhookEEmbed instance with optional parameters.
 
         Parameters:
         - title: The title of the embed.
-        - type: The type of the embed.
+        - e_type: The type of the embed.
         - description: The description text of the embed.
         - url: The URL of the embed.
         - timestamp: The timestamp of the embed.
@@ -22,7 +50,7 @@ class WebhookEEmbed(object):
         - fields: The fields of the embed.
         """
         self.title = title
-        self.type = type
+        self.type = e_type
         self.description = description
         self.url = url
         self.timestamp = timestamp
@@ -33,7 +61,10 @@ class WebhookEEmbed(object):
         self.video = video
         self.provider = provider
         self.author = author
-        self.fields = fields
+        if type(fields) is list:
+            self.fields = fields
+        else:
+            self.fields = [fields]
 
     def get_dict(self) -> dict:
         """
@@ -55,7 +86,7 @@ class WebhookEEmbed(object):
             "video":self.video,
             "provider":self.provider,
             "author":self.author,
-            "fields":self.fields
+            "fields":[f.get_dict() for f in self.fields]
         }
         return data
     
