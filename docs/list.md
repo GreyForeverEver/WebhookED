@@ -1,4 +1,4 @@
-# WebhookER Documentation
+# WebhookED Documentation
 
 ## Introduction
 
