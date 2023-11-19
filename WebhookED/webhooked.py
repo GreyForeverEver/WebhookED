@@ -1,4 +1,3 @@
-import json
 import requests
 
 class WebhookEField(object):
@@ -113,6 +112,10 @@ class WebhookEEmbed(object):
         self.provider = dict["provider"]
         self.author = dict["author"]
         self.fields = dict["fields"]
+    
+    def add_field(self, field: WebhookEField):
+        self.fields.append(field)
+
 
 class WebhookEMessage(object):
     def __init__(self, content: str = None, username: str = None, avatar_url: str = None, tts: bool = None, embeds: list[WebhookEEmbed] or WebhookEEmbed = []):
@@ -166,6 +169,9 @@ class WebhookEMessage(object):
         self.avatar_url = dict["avatar_url"]
         self.tts = dict["tts"]
         self.embeds = [WebhookEEmbed().load_from_dict(e) for e in dict["embeds"]]
+
+    def add_embed(self, embed: WebhookEEmbed):
+        self.embeds.append(embed)
 
 
 class WebhookEMessageSent(WebhookEMessage):
