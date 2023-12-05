@@ -65,6 +65,15 @@ class WebhookEEmbed(object):
         else:
             self.fields = [fields]
 
+    def add_field(self, field: WebhookEField):
+        """
+        Adds a field to the fields of the message.
+
+        Returns:
+        - field: The field to be appended.
+        """
+        self.fields.append(field)
+
     def get_dict(self) -> dict:
         """
         Returns a dictionary representation of the WebhookEEmbed instance.
@@ -112,9 +121,6 @@ class WebhookEEmbed(object):
         self.provider = dict["provider"]
         self.author = dict["author"]
         self.fields = dict["fields"]
-    
-    def add_field(self, field: WebhookEField):
-        self.fields.append(field)
 
 
 class WebhookEMessage(object):
@@ -137,6 +143,15 @@ class WebhookEMessage(object):
             self.embeds = embeds
         else:
             self.embeds = [embeds]
+
+    def add_embed(self, embed: WebhookEEmbed):
+        """
+        Adds an embed to the embeds of the message.
+
+        Returns:
+        - embed: The embed to be appended.
+        """
+        self.embeds.append(embed)
 
     def get_dict(self):
         """
