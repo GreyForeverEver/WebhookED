@@ -29,7 +29,7 @@ class WebhookEField(object):
         return data
         
 class WebhookEEmbed(object):
-    def __init__(self, title = None, e_type = None, description = None, url = None, timestamp = None, color = None, footer = None, image = None, thumbnail = None, video = None, provider = None, author = None, fields : [WebhookEField] or WebhookEField = []):
+    def __init__(self, title: str = None, e_type = None, description: str = None, url: str = None, timestamp = None, color = None, footer: str = None, image = None, thumbnail = None, video = None, provider = None, author = None, fields : [WebhookEField] or WebhookEField = []):
         """
         Initializes a WebhookEEmbed instance with optional parameters.
 
@@ -177,12 +177,12 @@ class WebhookEMessage(object):
 class WebhookEMessageSent(WebhookEMessage):
     def __init__(self, id: str, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        data = super().get_dict()
+        data.update({"id":id})
         self.id = id
 
     def get_dict(self):
-        data = super().get_dict()
-        data.update({"id":self.id})
-        return data
+        return self.id
 
 
 class WebhookEError(Exception):
