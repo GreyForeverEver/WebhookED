@@ -177,12 +177,12 @@ class WebhookEMessage(object):
 class WebhookEMessageSent(WebhookEMessage):
     def __init__(self, id: str, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        data = super().get_dict()
-        data.update({"id":id})
         self.id = id
 
     def get_dict(self):
-        return self.id
+        data = super().get_dict()
+        data.update({"id":self.id})
+        return data
 
 
 class WebhookEError(Exception):
