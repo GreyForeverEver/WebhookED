@@ -39,7 +39,7 @@ class WebhookEEmbed(object):
         - description: The description text of the embed.
         - url: The URL of the embed.
         - timestamp: The timestamp of the embed.
-        - color: The color code of the embed.
+        - color: The color hex code of the embed.
         - footer: The footer of the embed.
         - image: The image of the embed.
         - thumbnail: The thumbnail of the embed.
@@ -69,10 +69,19 @@ class WebhookEEmbed(object):
         """
         Adds a field to the fields of the message.
 
-        Returns:
+        Parameters:
         - field: The field to be appended.
         """
         self.fields.append(field)
+
+    def set_color_rgb(self, r, g, b):  
+        """
+        Sets the color from a rgb value.
+
+        Parameters:
+        - r, g, b: RGB values from 0 to 255.
+        """
+        self.color = "#{:02x}{:02x}{:02x}".format(r, g, b)
 
     def get_dict(self) -> dict:
         """
@@ -148,7 +157,7 @@ class WebhookEMessage(object):
         """
         Adds an embed to the embeds of the message.
 
-        Returns:
+        Parameters:
         - embed: The embed to be appended.
         """
         self.embeds.append(embed)
