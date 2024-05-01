@@ -28,9 +28,9 @@ def read_requirements(path):
 setup(
     name="WebhookED",
     version="0.1.0",
-    author="GreyForever",
+    author="pandora",
     description="A Python library for interacting with Discord webhooks",
-    url="https://github.com/GreyForever/WebhookED",
+    url="https://github.com/pandora-s-git/WebhookED",
     packages=find_packages(),
     install_requires=read_requirements("requirements.txt"),
     classifiers=[
