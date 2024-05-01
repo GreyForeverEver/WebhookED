@@ -10,7 +10,7 @@ WebhookED is a Python library designed to simplify interactions with Discord web
 Install WebhookED using pip:
 
 ```bash
-pip install git+https://github.com/GreyForeverEver/WebhookED.git
+pip install git+https://github.com/pandora-s-git/WebhookED.git
 ```
 
 ### Quick Start
